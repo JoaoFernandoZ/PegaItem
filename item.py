@@ -27,3 +27,5 @@ class Item:
             self.Posicao[1] = 0-random.randint(0,25)
             self.Posicao[0] = random.randint(0,__TamanhoJanela[0]-self.Tamanho[0])
             self.Velocidade = self.VelocidadeBase+random.randint(-3,3)
+
+# céu*
