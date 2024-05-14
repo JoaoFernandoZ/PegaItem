@@ -26,13 +26,13 @@ Clock       = pygame.time.Clock()
 
 Jogadores.append(Personagem("Imagens/Personagem.png", __TamanhoPlayer, __PosicaoInicial, __Controles))
 
-for Frutas in range(0,10,1):
+for Frutas in range(0,15,1):
     X = random.randint(0,__TamanhoJanela[0]-__TamanhoItem[0])
-    Items.append(Item(f"Imagens/comida_1.png", __TamanhoItem, X, 10, __TamanhoJanela, False))
+    Items.append(Item(f"Imagens/comida_{random.randint(1,6)}.png", __TamanhoItem, X, 7, __TamanhoJanela, False))
 
 for Bombas in range(0,8,1):
     X = random.randint(0,__TamanhoJanela[0]-__TamanhoItem[0])
-    Items.append(Item("Imagens/bomba.png", __TamanhoItem, X, 10, __TamanhoJanela, True))
+    Items.append(Item("Imagens/bomba.png", __TamanhoItem, X, 8, __TamanhoJanela, True))
 
 while EstaRodando:
     Eventos = pygame.event.get()
