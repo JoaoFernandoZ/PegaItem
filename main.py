@@ -15,7 +15,12 @@ Jogadores       = []
 Tela            = pygame.display.set_mode(__TamanhoJanela)
 pygame.display.set_caption("Pega Item")
 
+__Fundo     = pygame.image.load("Imagens/Fundo.jpg")
+__Fundo     = pygame.transform.scale(__Fundo, __TamanhoJanela)
+
 EstaRodando = True
+
+Clock       = pygame.time.Clock()
 
 while EstaRodando:
     Eventos = pygame.event.get()
@@ -24,3 +29,7 @@ while EstaRodando:
         if evento.type == pygame.QUIT: EstaRodando = False
     
     Tela.fill((25,25,25))
+    Tela.blit(__Fundo, (0,0))
+
+    pygame.display.update()
+    Clock.tick(60)
