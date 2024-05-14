@@ -11,6 +11,7 @@ __TamanhoCarro  = (50,50)
 __Controles     = (pygame.K_a, pygame.K_d)
 
 Jogadores       = []
+Items           = []
 
 Tela            = pygame.display.set_mode(__TamanhoJanela)
 pygame.display.set_caption("Pega Item")
@@ -22,7 +23,7 @@ EstaRodando = True
 
 Clock       = pygame.time.Clock()
 
-Jogadores.append(Personagem("imagens/Personagem.gif", __TamanhoPlayer, __PosicaoInicial, __Controles))
+Jogadores.append(Personagem("imagens/Personagem.png", __TamanhoPlayer, __PosicaoInicial, __Controles))
 
 while EstaRodando:
     Eventos = pygame.event.get()
