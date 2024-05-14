@@ -1,13 +1,14 @@
 import pygame
+import random
 from personagem import *
 from item       import *
 pygame.init()
 
 __TamanhoJanela = (800,500)
-__TamanhoPlayer = (55,55)
+__TamanhoPlayer = (65,65)
 __PosicaoInicial    = ((__TamanhoJanela[0]/2)-__TamanhoPlayer[0]/2  , __TamanhoJanela[1]-__TamanhoPlayer[1])
 
-__TamanhoCarro  = (50,50)
+__TamanhoItem  = (45,45)
 __Controles     = (pygame.K_a, pygame.K_d)
 
 Jogadores       = []
@@ -23,7 +24,15 @@ EstaRodando = True
 
 Clock       = pygame.time.Clock()
 
-Jogadores.append(Personagem("imagens/Personagem.png", __TamanhoPlayer, __PosicaoInicial, __Controles))
+Jogadores.append(Personagem("Imagens/Personagem.png", __TamanhoPlayer, __PosicaoInicial, __Controles))
+
+for Frutas in range(0,10,1):
+    X = random.randint(0,__TamanhoJanela[0]-__TamanhoItem[0])
+    Items.append(Item(f"Imagens/comida_1.png", __TamanhoItem, X, 10, __TamanhoJanela, False))
+
+for Bombas in range(0,8,1):
+    X = random.randint(0,__TamanhoJanela[0]-__TamanhoItem[0])
+    Items.append(Item("Imagens/bomba.png", __TamanhoItem, X, 10, __TamanhoJanela, True))
 
 while EstaRodando:
     Eventos = pygame.event.get()
@@ -40,6 +49,23 @@ while EstaRodando:
 
         JogadorPosY = Jogador.Posicao[1]
         JogadorPosX = Jogador.Posicao[0]
+
+        for Item in Items:
+            ItemPosY = Item.Posicao[1]
+            ItemPosX = Item.Posicao[0]
+
+            Hb = (ItemPosX-JogadorPosX, ItemPosY-JogadorPosY)
+
+            if Jogador.Mascara.overlap(Item.Mascara, Hb):
+                if Item.Dano == True:
+                    Jogador.Posicao = [__PosicaoInicial[0], __PosicaoInicial[1]]
+                else:
+                    Item.Posicao[1] = 0-random.randint(0,25)
+                    Item.Posicao[0] = random.randint(0,__TamanhoJanela[0]-Item.Tamanho[0])
+
+    for Item in Items:
+        Item.Andar(__TamanhoJanela)
+        Item.Posicionar(Tela)
 
     pygame.display.update()
     Clock.tick(60)
