@@ -4,11 +4,11 @@ from item       import *
 pygame.init()
 
 __TamanhoJanela = (800,500)
-__TamanhoPlayer = (40,40)
+__TamanhoPlayer = (55,55)
 __PosicaoInicial    = ((__TamanhoJanela[0]/2)-__TamanhoPlayer[0]/2  , __TamanhoJanela[1]-__TamanhoPlayer[1])
 
 __TamanhoCarro  = (50,50)
-__Controles     = (pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d, 0)
+__Controles     = (pygame.K_a, pygame.K_d)
 
 Jogadores       = []
 
@@ -22,6 +22,8 @@ EstaRodando = True
 
 Clock       = pygame.time.Clock()
 
+Jogadores.append(Personagem("imagens/Personagem.gif", __TamanhoPlayer, __PosicaoInicial, __Controles))
+
 while EstaRodando:
     Eventos = pygame.event.get()
 
@@ -30,6 +32,13 @@ while EstaRodando:
     
     Tela.fill((25,25,25))
     Tela.blit(__Fundo, (0,0))
+
+    for Jogador in Jogadores:
+        Jogador.Movimentar(__TamanhoJanela)
+        Jogador.Posicionar(Tela)
+
+        JogadorPosY = Jogador.Posicao[1]
+        JogadorPosX = Jogador.Posicao[0]
 
     pygame.display.update()
     Clock.tick(60)
