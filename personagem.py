@@ -1,12 +1,13 @@
 import pygame
 
 class Personagem:
-    def __init__(self, Imagem : str, Tamanho : tuple, Posicao : tuple, Controles : tuple) -> None:
+    def __init__(self, Imagem : str, Tamanho : tuple, Posicao : tuple, Controles : tuple, Velocidade : float, Scala : float) -> None:
         self.Imagem = pygame.image.load(Imagem)
         self.Tamanho = [Tamanho[0], Tamanho[1]]
         self.Posicao = [Posicao[0], Posicao[1]]
         self.PosicaoInicial = self.Posicao
         self.Controles = Controles # A = 0 | S = 1
+        self.Velocidade = Velocidade
 
         self.Imagem = pygame.transform.scale(self.Imagem, self.Tamanho)
 
@@ -19,6 +20,6 @@ class Personagem:
         __TeclasApertadas = pygame.key.get_pressed()
 
         if __TeclasApertadas[self.Controles[0]] and self.Posicao[0] > 0:
-            self.Posicao[0] -= 5
+            self.Posicao[0] -= int(self.Velocidade)
         if __TeclasApertadas[self.Controles[1]] and self.Posicao[0] < __TamanhoJanela[0]-self.Tamanho[0]:
-            self.Posicao[0] += 5
+            self.Posicao[0] += int(self.Velocidade)
